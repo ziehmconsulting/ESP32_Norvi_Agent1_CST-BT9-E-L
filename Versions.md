@@ -36,16 +36,17 @@ The commit-message include the changes with prefix
 ------------------------------------------
 ### Development Stage 0 (major-release)
 #### 0.0.1
-- Publish start up data
-- Connect to MQTT broker over NB-IoT
-- Subscribe to topics for schedule updates
-- Send And Get TestData @Thingsboard
-- Read the Sensordata from ACS712
-- Implement EEPROM & Variables (global)
-- Read date and time information from DS3231 RTC
-- Set alarms on DS3231 RTC for Special dates and week day information
-- Publish current consumption variable on a set interval
-- Publish schedule on MQTT requests
+- [x] Publish start up data
+- [x] Connect to MQTT broker over NB-IoT
+- [x]Send TestData @Thingsboard
+- [ ]Subscribe to topics for schedule updates
+
+- [x]Read the Sensordata from ACS712
+- [ ]Implement EEPROM & Variables (global)
+- [ ]Read date and time information from DS3231 RTC
+- [ ]Set alarms on DS3231 RTC for Special dates and week day information
+- [ ]Publish current consumption variable on a set interval
+- [ ]Publish schedule on MQTT requests
 
 #### 0.0.2
 - Hosting webserver on ESP32
