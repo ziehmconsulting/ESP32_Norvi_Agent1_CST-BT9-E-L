@@ -1,7 +1,7 @@
 # Versioning of the Project
 Norvi_Agent_1 (CST-BT-E-L)
 
-SemVer: <major>.<minor>.<patch>
+SemVer: "<major>.<minor>.<patch>"
 [semver](https://semverdoc.org/)
 
 Bugfix      14.16.1 -> 14.16.2 (patch)
@@ -10,6 +10,14 @@ Feature     14.16.2 -> 14.17.0 (minor, downward compatible)
 
 Breaking    14.17.0 -> 15.0.0  (major)
 
+Präfix Recomendation:
+"feat:" -> Feature-Change: 14.16.2 -> 14.17.0
+"feat!:" -> Feature, not downward compatible
+"fix:" -> Bug-Fix or Patch
+"fix!:" -> Bug-Fix or Patch,not downward compatible
+"chore" -> clean up example: Remove some comments
+"docs:" -> example: Update README.md
+"refactor:" example rewrite function or class xyz
 
 Release-Logic:Conventional Commits:
 
