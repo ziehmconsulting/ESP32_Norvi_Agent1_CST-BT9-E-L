@@ -1,7 +1,7 @@
 #include <Arduino.h>
-struct ACCESSDATA{
+struct GLOBALDATA{
 
 
 };
 
-inline ACCESSDATA globaldata;
+inline GLOBALDATA globaldata;

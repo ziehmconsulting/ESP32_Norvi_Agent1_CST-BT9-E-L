@@ -2,7 +2,7 @@
 #include <Arduino.h>
 /***********************************************NETWORK PAGE VARIABLES************************************************************/
 
-struct ACCESSDATA{
+struct NETWORKDATA{
 
 String NETWORK_APN = "wsim";
 //String MQTT_SERVER = "mqtt.thingsboard.cloud";
@@ -13,4 +13,4 @@ String MQTT_USER = "norvi5";
 int MQTT_PORT = 1883;
 };
 
-inline ACCESSDATA data;
+inline NETWORKDATA data;
