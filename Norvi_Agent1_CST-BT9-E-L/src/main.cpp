@@ -33,7 +33,7 @@
 #include <HardwareSerial.h>
 #include <ArduinoJson.h>
 #include "features/ACS712_Features.hpp"
-
+#include "features/DS3231_Feature.hpp"
 
 
 /***********************************************SCHEDULER PAGE VARIABLES**********************************************************/
@@ -500,9 +500,13 @@ void setup()
   digitalWrite(GSM_RESET, HIGH);
   pinMode(GSM_ENABLE, OUTPUT);
   digitalWrite(GSM_ENABLE, HIGH); /* Turn ON output*/
-
+  Serial.println("*******************************set RTC!***********************************************");
+  setRTC();
   Serial.println("*******************************activate curent sensor!***********************************************");
   //setCurrentSensor();
+  setRTC();
+  delay(400);
+  getTime();
 
   Serial.println("*******************************sensor activation Done!***********************************************");
   delay(500);
@@ -621,4 +625,5 @@ void loop()
     mqttMessage = "";
     Ignore = false;
   };
+
 }

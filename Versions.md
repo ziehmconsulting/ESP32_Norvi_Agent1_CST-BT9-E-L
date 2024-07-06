@@ -47,16 +47,20 @@ The commit-message include the changes with prefix
 - [ ]Set alarms on DS3231 RTC for Special dates and week day information
 - [ ]Publish current consumption variable on a set interval
 - [ ]Publish schedule on MQTT requests
-
-#### 0.0.2
-- Hosting webserver on ESP32
-- Retrive data from webpage and save on ESP32 Flash memory
-- Retrive data from ESP32 Flash memory and push to webpage
-- Turn output ON and OFF based on current date and time and schedule
-
+- [ ] Serial Input ( Bidirectional from Serial to Serial1)
+------------------------------------------
+#### 0.1.0
+- feat: Hosting webserver on ESP32
+- feat: Retrive data from webpage and save on ESP32 Flash memory
+- feat: Retrive data from ESP32 Flash memory and push to webpage
+------------------------------------------
+#### 0.2.0
+- feat: Turn output ON and OFF based on current date and time and schedule
+- feat: implement Serial2 AT Command iO
 ------------------------------------------
 ### Development Stage 1 (major-release: 1.x.y)
 - Fix: <ArduinoJson.h> change to not deprecated library
+- Free RTOS seperate Tasks to cores
 
 ------------------------------------------
 ### Development Stage 2 (major-release: 2.x.y)
