@@ -68,7 +68,7 @@ char ready2read = 0;  //this is set to 1 when is finished reading from serial
 char foundchar[6];  //small buffer that works as a shift register to hold only the command for comparison
 
 const long interval = 1000;
-static long currentMillis;
+//static long currentMillis;
 
 //*********************************************************************************************
 uint8_t concatinateTime(uint8_t a, uint8_t b) {
