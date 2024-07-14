@@ -27,14 +27,18 @@
 * F21/33  A.03.04 20April2024 TZ      add Header
 *
 *H*/
+
 /********************************************************************************************************************NETWORK PAGE VARIABLES****************************************/
-#include "credentials.hpp"
-#include "global_variables.hpp"
 #include <HardwareSerial.h>
 #include <ArduinoJson.h>
+#include <iostream> // std::cout
+#include <string>   // std::string, std::stoi
+
+#include "credentials.hpp"
+#include "global_variables.hpp"
 #include "features/ACS712_Features.hpp"
-
-
+#include "features/global_variables.hpp"
+#include "features/updateRTCbyNetworkTime.hpp"
 
 /***********************************************SCHEDULER PAGE VARIABLES**********************************************************/
 // Define starting addresses for each text zone
@@ -48,6 +52,7 @@
 #define ADDR_MQTT_DN 60
 #define ADDR_MQTT_ID 72
 #define ADDR_MQTT_SD 86
+
 /**********************************************************************************************************************************/
 // Modem Serial Pins
 #define RX_PIN 4       // ESP32 RX pin
@@ -55,6 +60,7 @@
 #define BAUD_RATE 9600 // Baud rate for ESP32 UART communication
 #define GSM_RESET 19
 #define GSM_ENABLE 18
+
 /**********************************************************************************************************************************/
 // Define MQTT topics
 #define MQTT_TOPIC_1 "v1/devices/me/rpc/request/1"
@@ -62,6 +68,7 @@
 #define MQTT_TOPIC_5 "v1/devices/me/rpc/request/3"
 #define MQTT_TOPIC_3 "v1/devices/me/attributes"
 #define MQTT_TOPIC_4 "v1/devices/me/telemetry"
+
 /**********************************************************************************************************************************/
 // Define your firmware version and serial number here
 String firmwareVersion = "1.23";
@@ -69,6 +76,7 @@ String serialNumber = "SN-12345";
 String mqttMessage = "";
 String payload = "";
 bool Ignore = false;
+
 /**********************************************************************************************************************************/
 // Define your sensor variables here
 int energy = 65451;
@@ -78,6 +86,7 @@ float current = 12.5;
 // Define a constant for the interval (in milliseconds)
 #define MQTT_CHECK_INTERVAL 10000  // 10 seconds
 #define SENSOR_SEND_INTERVAL 20000 // 20 seconds
+
 /**********************************************************************************************************************************/
 // Get the current time
 unsigned long currentMillis = 0;
@@ -86,6 +95,7 @@ unsigned long lastMQTTCheckTime = 0;
 unsigned long previousMillis = 0;
 // Define a variable to store the last time Sensor data was sent
 unsigned long lastSensorValSentTime = 0;
+
 /**************************************************HANDLE SAVE FROM WEB FUNCTION**************************************************/
 // monitor serial
 void monitorSerial1()
@@ -487,24 +497,23 @@ void handleMQTTTopic1(const String &payload)
   }
 }
 
+void setSerials()
+{
+  Serial.begin(BAUD_RATE);
+  Serial1.begin(BAUD_RATE, SERIAL_8N1, RX_PIN, TX_PIN);
+}
 
 /*******************************************************SETUP********************************************************************/
 void setup()
 {
-
-  Serial.begin(9600);
-  delay(400);
-  Serial1.begin(BAUD_RATE, SERIAL_8N1, RX_PIN, TX_PIN);
-  delay(400);
+  setSerials();
   pinMode(GSM_RESET, OUTPUT);
   digitalWrite(GSM_RESET, HIGH);
   pinMode(GSM_ENABLE, OUTPUT);
   digitalWrite(GSM_ENABLE, HIGH); /* Turn ON output*/
-
-  Serial.println("*******************************activate curent sensor!***********************************************");
+  Serial.println("Serial configured");
+  Serial.println("*******************************activate current sensor!***********************************************");
   //setCurrentSensor();
-
-  Serial.println("*******************************sensor activation Done!***********************************************");
   delay(500);
 
   Serial.println("********************************Starting Setup!*****************************************************");
@@ -534,6 +543,13 @@ void setup()
   Serial.println("--------------------------Publishing Sensor Values-----------------------------------------------");
   publishSensorValues(energy, current);
 
+  Serial.println("*******************************Starting the RTC-Module!***********************************************");
+  Serial1.print("ATE0"); // Disable echo !!! Important to avoide overhead of regular calcluation
+  //! TODO: add feedback "if ok" function
+  delay(500);
+  Serial1.print("ATE0");
+  delay(3000);
+  setupRTC();
   Serial.println("**************************Setup Successfully executed!********************************************");
 }
 /*******************************************************LOOP********************************************************************/
