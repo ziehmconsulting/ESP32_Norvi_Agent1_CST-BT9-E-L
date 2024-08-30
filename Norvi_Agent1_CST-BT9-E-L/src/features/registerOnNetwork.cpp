@@ -98,10 +98,15 @@ void registerOnNetwork(const String &apn)
     if (failedAttempts == 5)
     {
       Serial.println("Failed to register on the network after 5 attempts. Rebooting modem...");
+      Serial1.println("AT+CFUN=0");
+      Serial.println("AT+CFUN=0");
+      delay(100);
       rebootModem();
       failedAttempts = 0; // Reset the counter
     }
 
     Serial.println("Failed to register on the network. Retrying...");
+    Serial1.println("AT+CFUN=0");
+    Serial.println("AT+CFUN=0");
   }
 }

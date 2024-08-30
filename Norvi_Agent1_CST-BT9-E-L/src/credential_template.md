@@ -2,12 +2,12 @@
 
 struct NETWORKDATA{
 
-String NETWORK_APN = "XXX";
-String MQTT_SERVER = "mqtt.thingsboard.cloud";
+String NETWORK_APN = "wsim";
+String MQTT_SERVER = "mqtt.thingsboard-server.de";
 
-String MQTT_PW = "pw";
-String MQTT_ID = "id";
-String MQTT_USER = "user";
+String MQTT_PW = "norvi";
+String MQTT_ID = "norvi";
+String MQTT_USER = "norvi";
 int MQTT_PORT = 1883;
 };
 

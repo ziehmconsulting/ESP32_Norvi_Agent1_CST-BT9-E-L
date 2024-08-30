@@ -35,7 +35,6 @@
 
 #include "features/global_variables.hpp"
 #include "features/ACS712_Features.hpp"
-#include "features/global_variables.hpp"
 #include "features/updateRTCbyNetworkTime.hpp"
 #include "features/monitorSerial.hpp"
 #include "features/publishSensorValues.hpp"
